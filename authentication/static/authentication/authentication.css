@@ -1,0 +1,162 @@
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+html { height: 100%; }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image:
+        url('https://www.transparenttextures.com/patterns/bright-squares.png'),linear-gradient(to bottom right, #6a00ff, #6aff00);
+
+    font-family: Cabin;
+}
+
+#auth-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 35%;
+    min-height: 350px;
+    background-color: #fffb;
+    box-shadow: 0 3px 15px #0003;
+    border-radius: 5px;
+}
+
+#auth-extra-info {
+    position: absolute;
+    bottom: calc(100% - 50px);
+    left: calc(100% - 20px);
+    box-shadow: 0 3px 12px #0002;
+
+    border-radius: 35px;
+    background-color: #fff;
+    width: 300px;
+    min-height: 100px;
+    padding: 0 35px;
+}
+#auth-extra-info .bubble-1 {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    left: -90px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    box-shadow: 0 3px 36px #0002;
+    background-color: #fffd;
+}
+#auth-extra-info .bubble-2 {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: -45px;
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+    box-shadow: 0 3px 24px #0002;
+    background-color: #fffe;
+}
+
+#auth-container .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8rem;
+    height: 8rem;
+    transform: translate(-10%, -40%);
+    padding: .5rem;
+    transition: top .35s, left .35s, width .35s, height .35s;
+}
+
+#auth-container .logo img {
+    transform: rotate(65deg);
+    width: 100%;
+    height: 100%;
+    transition: transform .35s;
+}
+
+#auth-container .logo.focus {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+}
+
+#auth-container .logo.focus img {
+    transform: rotate(90deg);
+}
+
+#auth-container .header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#auth-container .header .title {
+    margin-bottom: 0;
+}
+
+#auth-container .body form {
+    padding: 25px;
+}
+
+#auth-container .body form .errorlist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #fdd;
+    border: 2px solid #f00;
+    color: #a00;
+    border-radius: 5px;
+}
+
+#auth-container .body form .errorlist li {
+    padding: .65rem 1rem;
+}
+
+#auth-container .body form label {
+    margin-bottom: 5px;
+    display: block;
+    text-align: center;
+}
+
+#auth-container .body form input {
+    display: block;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0.65rem;
+    border: 2px solid #ccc;
+    width: 100%;
+    box-shadow: none;
+    transition: box-shadow: 0.35s;
+    text-align: center;
+}
+
+#auth-container .body form input:invalid {
+    border-color: #f00;
+    box-shadow: 0 0 0 3px #f004;
+}
+
+#auth-container .body form input:focus {
+    border-color: #6a00ff;
+    box-shadow: 0 0 0 3px #6a00ff58;
+}
+
+#auth-container .body form .form-footer {
+    text-align: center;
+}
+
+#auth-container .body form button[type="submit"] {
+    background-color: #6a00ff;
+    padding: .65rem 1.25rem;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    font-family: inherit;
+}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'miner/miner.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="miners">
+    <form action="{{ add_url }}" method="POST" class="miners-header">
+        {% csrf_token %}
+        <input class=" title" name="handle" placeholder="Search for a Miner... or add one" />
+        <button class="miners-add tooltip-container" type="submit">
+            Add a miner
+            <div class="tooltip">Only adds by handle<br />('Screen Name').</div>
+        </button>
+    </form>
+
+    <div class="miners-body">
+        <ul class="miner-names"></ul>
+    </div>
+</div>
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        let searchField = document.querySelector("#miners .miners-header .title");
+        let minerNameContainer = document.querySelector("#miners .miners-body .miner-names");
+        let minerNameTemplate = document.querySelector("#miner-name-template");
+
+        let addMinerForm = document.querySelector("#miners .miners-header");
+
+        let minerLink = "{{ miner_url }}"
+        let lastSlash = minerLink.lastIndexOf("/") - 1;
+        minerLink = minerLink.slice(0, lastSlash);
+
+        searchField.addEventListener("input", (e) => {
+            let url = new URL("{{ search_url }}");
+            let params = { q: e.currentTarget.value, ajax: true };
+
+            url.search = new URLSearchParams(params).toString();
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    minerNameContainer.textContent = "";
+
+                    data.forEach((el) => {
+                        let link = minerLink + el["tid"];
+                        let minerItem = createMinerNameTemplate(el["name"], el["handle"], el["follower_count"], link);
+                        minerNameContainer.appendChild(minerItem);
+                    });
+                });
+        });
+
+        addMinerForm.addEventListener("submit", (e) => {
+            let headers = new Headers();
+            let formData = new FormData(e.currentTarget);
+            let url = e.currentTarget.getAttribute("action");
+            header.set("Accept", "application/json");
+
+            let fetchOptions = {
+                method: "POST",
+                header,
+                body: formData
+            };
+
+            fetch(url, fetchoptions).then(response => {
+                if (response.ok) {
+                    alert("Miner Successfully Added");
+                }
+            });
+
+            // fetch(url, {
+            //     method: "POST"
+            // })
+            //     .then(response => {
+            //         if (response.ok) {
+            //             alert("Miner Successfully Added.");
+            //         }
+            //     })
+
+            e.preventDefault();
+        });
+
+        let event = new Event("input");
+        searchField.dispatchEvent(event);
+    });
+
+    function createMinerNameTemplate(name, handle, followers, link) {
+        let root = document.createElement("li");
+        root.classList.add("menu-item")
+
+        if (true) {
+            let anchor = document.createElement("a");
+            anchor.href = link;
+
+            if (true) {
+                let identifiers = document.createElement("div");
+                identifiers.classList.add("menu-item-ids");
+
+                if (true) {
+                    let nameSpan = document.createElement("span");
+                    nameSpan.classList.add("miner-item-name");
+                    nameSpan.innerText = name;
+                    let handleSpan = document.createElement("span");
+                    handleSpan.classList.add("miner-item-handle");
+                    handleSpan.innerText = "@" + handle;
+
+                    identifiers.appendChild(nameSpan);
+                    identifiers.appendChild(handleSpan);
+                }
+
+                if (true) {
+                    let followerCount = document.createElement("span");
+                    followerCount.classList.add("miner-follower-count");
+                    followerCount.innerText = followers.toString();
+                }
+                anchor.appendChild(identifiers);
+            }
+            root.appendChild(anchor);
+        }
+
+        return root;
+    }
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% if lastUpdated is defined %}
+<div class="footer-status">
+    Last Updated: <span class="last-updated">{{ last_updated }}</span>
+    <button class="update-mine">Update Mine Data</button>
+</div>
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        let redoMine = document.querySelector(".footer-status .update-mine");
+        let lastUpdated = document.querySelector(".footer-status .last-updated");
+
+        redoMine.addEventListener("click", () => {
+            let url = new URL("{{ update_url }}");
+
+            fetch(url)
+            .then(response => response.ok)
+                .then(data => {
+                    lastUpdated.innerHTML = data["timestamp"];
+                })
+            });
+    });
+</script>
+{% endif %}

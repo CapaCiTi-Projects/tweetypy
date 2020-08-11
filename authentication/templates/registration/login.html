@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/authentication.css' %}"/>
+</head>
+<body>
+
+
+<div id="auth-container">
+    <div id="auth-extra-info">
+        <div class="bubble-1"></div>
+        <div class="bubble-2"></div>
+        <p class="info">
+            You need to sign in before using this application. If you don't have login information,
+            contact the system administrator and they will create and account for you.
+        </p>
+    </div>
+
+    <div class="logo"><img src="{% static 'authentication/logo.svg' %}"/></div>
+    <div class="header">
+        <p class="title">Login</p>
+    </div>
+    <div class="body">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-footer">
+                <button type="submit">Log Me In</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var inputs = document.getElementsByTagName("input");
+        var form = document.forms[0];
+        var logo = document.getElementsByClassName("logo")[0];
+
+        for (let el of inputs) {
+            if (el.form == form && ["text", "password"].includes(el.type)) {
+                el.addEventListener("focus", (e) => {
+                    let target = e.currentTarget;
+
+                    logo.style.top = "calc(1.05rem + " + target.offsetTop + "px";
+                    logo.style.left = "calc(.5rem + " + target.offsetLeft + "px";
+                    logo.classList.add("focus");
+                    console.log(target.offsetTop);
+                });
+                el.addEventListener("blur", (e) => {
+                    logo.removeAttribute("style");
+                    logo.classList.remove("focus");
+                });
+            }
+        }
+
+
+    </script>
+</div>
+
+</body>
+</html>

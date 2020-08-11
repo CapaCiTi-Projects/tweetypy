@@ -1,0 +1,21 @@
+#footer {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid #dee2e6;;
+}
+
+#footer .footer-status .update-mine {
+    margin-left: 12px;
+    font-family: inherit;
+    border-radius: 100px;
+    padding: 5px 12px;
+    border: 2px solid #060;
+    background-color: #fff;
+    box-shadow: 0 3px 5px #0001;
+    transition: background-color 0.35s, color 0.35s;
+}
+#footer .footer-status .update-mine:hover {
+    background-color: #060;
+    color: #fff;
+}

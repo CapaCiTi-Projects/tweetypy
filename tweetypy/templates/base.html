@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width;initial-scale=1" />
+
+    <title>TweetyPy</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/header.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/common.css' %}" />
+</head>
+
+<body>
+    <header id="header">{% include "authentication/header.html" %}</header>
+
+    {% block content %}{% endblock %}
+
+    <footer id="footer">{% include "authentication/footer.html" %}</footer>
+</body>
+
+</html>

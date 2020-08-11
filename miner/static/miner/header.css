@@ -1,0 +1,25 @@
+#header {
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px
+}
+#header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 250px;
+    z-index: -1;
+
+    background-image: url("https://www.transparenttextures.com/patterns/black-lozenge.png"),
+        linear-gradient(to bottom right, #0605, #ff05);
+}
+#header .header-main {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 1px 8px #0005;
+    color: #fff;
+}

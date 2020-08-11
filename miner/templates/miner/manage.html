@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'miner/manage.css' %}" />
+{% endblock %}
+
+{% block content %}
+<a class="home-return" href="{% url 'miners' %}">Return Home</a>
+
+<div class="miner-data">
+    <div class="miner-header">
+        <div class="title">{{ miner.name }}</div>
+        <div class="subtitle">@{{ miner.handle }}</div>
+    </div>
+
+    <div class="charts-data">
+        <canvas id="status-data-chart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" crossorigin=""></script>
+<script>
+    let statusCtx = document.getElementById("status-data-chart").getContext("2d");
+
+    let data = {
+        labels: [
+            {% for date in creation_dates %}
+                new Date({% widthratio date|date:"U" 1 1000 %}),
+            {% endfor %}
+        ],
+        datasets: [
+            {
+                label: "Retweet Count",
+                data: [
+                    {% for tweet in retweet_list %}
+                        {{ tweet }},
+                    {% endfor %}
+                ],
+                borderColor: "#600"
+            },
+            {
+                label: "Favourite Count",
+                data: [
+                    {% for tweet in favourite_list %}
+                        {{ tweet }},
+                    {% endfor %}
+                ],
+                borderColor: "#006"
+            }
+        ]
+    };
+
+    let chart = new Chart(statusCtx, {
+        type: "line",
+        data: data,
+    });
+</script>
+{% endblock %}
